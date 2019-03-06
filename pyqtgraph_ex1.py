@@ -13,14 +13,14 @@ win.resize(800, 300)
 
 p = win.addPlot()
 p.showGrid(x=True, y=True)
-p.setRange(xRange=[0, 1024], yRange=[-3, 3])
+p.setRange(xRange=[0, 1024], yRange=[-1, 1])
 
 curve = p.plot(pen='g')
 curve.setData(np.random.randn(200, ))
 
 p2 = win.addPlot()
 p2.showGrid(x=True, y=True)
-p2.setRange(yRange=[-60, 40])
+p2.setRange(yRange=[-100, 0])
 c2 = p2.plot(pen='y')
 
 f = 10
@@ -28,8 +28,10 @@ f = 10
 
 def update():
 	global curve, f
+
 	# data = 2 * np.random.rand(1024, ) - 1
-	data = np.sin(2 * np.pi * f / SAMPLE_RATE * np.arange(0, 1024))
+	data = np.tanh(np.random.randn(1024, ))
+	# data = np.sin(2 * np.pi * f / SAMPLE_RATE * np.arange(0, 1024))
 	# data = data + 0.25 * np.hstack((data[1:], [0])) - 0.4 * np.hstack((data[2:], [0, 0]))
 	curve.setData(data)
 	spec = np.fft.fft(data * np.hanning(len(data)), 8192) / len(data)
